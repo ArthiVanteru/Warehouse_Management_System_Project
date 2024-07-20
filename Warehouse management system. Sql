@@ -1,27 +1,36 @@
 CREATE DATABASE WarehouseManagement;
+
 USE WarehouseManagement;
+
+-- Table for storing product details
 CREATE TABLE Product (
     product_id INT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     description TEXT,
     price DECIMAL(10, 2) NOT NULL,
     quantity INT NOT NULL,
-    category VARCHAR(105),
+    category VARCHAR(255),
     supplier_id INT,
     FOREIGN KEY (supplier_id) REFERENCES Supplier(supplier_id)
 );
+
+-- Table for storing supplier details
 CREATE TABLE Supplier (
     supplier_id INT PRIMARY KEY,
-    s_name VARCHAR(100) NOT NULL,
-    email VARCHAR(100),
-    contact_person VARCHAR(100)
+    s_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255),
+    contact_person VARCHAR(255)
 );
+
+-- Table for storing warehouse details
 CREATE TABLE Warehouse (
     warehouse_id INT PRIMARY KEY,
-    location VARCHAR(100) NOT NULL,
+    location VARCHAR(255) NOT NULL,
     capacity INT,
-    email VARCHAR(100)
+    email VARCHAR(255)
 );
+
+-- Table for storing shipment details
 CREATE TABLE Shipment (
     shipment_id INT PRIMARY KEY,
     order_id INT,
@@ -31,6 +40,8 @@ CREATE TABLE Shipment (
     FOREIGN KEY (order_id) REFERENCES `Order`(order_id),
     FOREIGN KEY (warehouse_id) REFERENCES Warehouse(warehouse_id)
 );
+
+-- Table for storing order details
 CREATE TABLE `Order` (
     order_id INT PRIMARY KEY,
     customer_id INT,
@@ -39,12 +50,12 @@ CREATE TABLE `Order` (
     total_amount DECIMAL(10, 2),
     FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
 );
+
+-- Table for storing customer details
 CREATE TABLE Customer (
     customer_id INT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     address TEXT,
     phone_num VARCHAR(15)
 );
-
-
 
